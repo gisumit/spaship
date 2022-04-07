@@ -1,6 +1,6 @@
 import React from "react";
-import { Text, TextContent, TextVariants } from "@patternfly/react-core";
 import styled from "styled-components";
+import { Text, TextContent, TextVariants } from "@patternfly/react-core";
 import { Properties } from "../models/props";
 import AggregateChart from "./aggregate-chart";
 

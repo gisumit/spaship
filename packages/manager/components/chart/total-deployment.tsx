@@ -1,7 +1,7 @@
-import { ChartThemeColor } from "@patternfly/react-charts";
-import { Text, TextContent, TextVariants } from "@patternfly/react-core";
 import React from "react";
 import styled from "styled-components";
+import { ChartThemeColor } from "@patternfly/react-charts";
+import { Text, TextContent, TextVariants } from "@patternfly/react-core";
 import { Properties } from "../models/props";
 import AggregateChart from "./aggregate-chart";
 
