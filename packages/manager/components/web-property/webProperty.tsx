@@ -20,7 +20,7 @@ const WebProperty = ({ webprop }: Properties) => {
           isCompact
           key={prop.id}
           isRounded
-          onClick={() => router.push(`properties/${prop.webPropertyName}`)}
+          onClick={() => router.push(`/properties/${prop.webPropertyName}`)}
         >
           <CardStyle>
             <CardTitle>{prop.webPropertyName}</CardTitle>

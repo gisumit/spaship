@@ -1,19 +1,25 @@
-import {
-  Gallery,
-  PageSection
-} from "@patternfly/react-core";
-import styled from 'styled-components';
-import Header from "../../components/layout/header";
+import styled from "styled-components";
+import { Gallery, PageSection } from "@patternfly/react-core";
+import Body from "../../components/layout/body";
 import { AnyProps, Properties } from "../../components/models/props";
 import AddProperty from "../../components/web-property/addProperty";
 import WebProperty from "../../components/web-property/webProperty";
+import { ComponentWithAuth } from "../../utils/auth.utils";
 import { get, post } from "../../utils/api.utils";
 import { getHost } from "../../utils/config.utils";
 
+const meta = {
+  title: "Your Web Properties ",
+  breadcrumbs: [
+    { path: "/", title: "Home" },
+    { path: "/properties", title: "Properties" },
+  ],
+};
+
 export const payload = {
-  "count": {
-    "all": true
-  }
+  count: {
+    all: true,
+  },
 };
 
 export const getStaticProps = async () => {
@@ -28,40 +34,34 @@ export const getStaticProps = async () => {
   };
 };
 
+function getPropertyListResponse(propertyListResponse: AnyProps, deploymentCountResponse: AnyProps) {
+  for (let index in propertyListResponse) {
+    let data = deploymentCountResponse.find(
+      (property: AnyProps) => property.propertyName === propertyListResponse[index].webPropertyName
+    );
+    propertyListResponse[index].count = data?.count || 0;
+  }
+}
+
 export const DividerComp = styled.hr`
   border-top: 1px solid var(--spaship-global--Color--bright-gray);
-  width: 60vw;
 `;
 
-
-export const GalleryStyle = styled(Gallery)`
-  padding : 0 10vw
-`;
-
-const HomePage = ({ webprop }: Properties) => {
+const PropertiesListPage: ComponentWithAuth = ({ webprop }: Properties) => {
   return (
-    <>
-      <Header title="Your Web Properties"></Header>
+    <Body {...meta}>
       <PageSection isFilled>
-        <br></br>
+        <br />
         <Gallery hasGutter>
-          <AddProperty></AddProperty>
+          <AddProperty />
           <WebProperty webprop={webprop}></WebProperty>
         </Gallery>
         <br />
         <DividerComp />
-        <br />
       </PageSection>
-    </>
+    </Body>
   );
 };
 
-HomePage.authenticationEnabled = true;
-export default HomePage;
-
-function getPropertyListResponse(propertyListResponse: AnyProps, deploymentCountResponse: AnyProps) {
-  for (let index in propertyListResponse) {
-    let data = deploymentCountResponse.find((property: AnyProps) => property.propertyName === propertyListResponse[index].webPropertyName);
-    propertyListResponse[index].count = data?.count || 0;
-  }
-}
+PropertiesListPage.authenticationEnabled = true;
+export default PropertiesListPage;
