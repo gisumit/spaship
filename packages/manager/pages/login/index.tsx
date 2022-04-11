@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import { useSession, signIn } from "next-auth/react";
+import Link from "next/link";
+import Image from "next/image";
+import styled from "styled-components";
 import { FileAltIcon, GithubIcon, OptimizeIcon, UserIcon } from "@patternfly/react-icons";
 import {
   Bullseye,
@@ -21,7 +22,6 @@ import {
   Title,
 } from "@patternfly/react-core";
 import EmptySpinner from "../../components/general/empty-spinner";
-import styled from "styled-components";
 import rocket from "../../public/images/illustrations/rocket.svg";
 import darkLogo from "../../public/images/logo/spaship-logo-dark-vector.svg";
 
